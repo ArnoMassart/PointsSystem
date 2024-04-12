@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:points_system/bottom_nav_bar.dart';
 import 'package:points_system/classes.dart';
 import 'package:points_system/game_detail.dart';
@@ -42,7 +41,6 @@ class _GamesListState extends State<GamesList> {
     selectedPlayerNames = [];
     playersList = widget.players;
     setState(() {
-      print(playersList.length);
       for (Game game in widget.games) {
         if (game.name.toLowerCase().contains(value.toLowerCase())) {
           sortedGamesList.add(game);
@@ -272,7 +270,7 @@ class _GamesListState extends State<GamesList> {
                                             checkSortedList(widget.games);
                                           });
                                         },
-                                        child: Icon(Icons.remove),
+                                        child: const Icon(Icons.remove),
                                       ),
                                     ],
                                   ),
@@ -304,12 +302,14 @@ class _GamesListState extends State<GamesList> {
                 ),
                 GameService.getSizedBox(height: 25),
                 noGamesFound
-                    ? const Center(
-                        heightFactor: Checkbox.width / 2,
-                        widthFactor: Checkbox.width / 2,
-                        child: Text(
-                          "No games in the list.",
-                          style: TextStyle(fontSize: 32),
+                    ? const Padding(
+                        padding: EdgeInsets.all(25.0),
+                        child: Center(
+                          widthFactor: Checkbox.width / 2,
+                          child: Text(
+                            "No games in the list.",
+                            style: TextStyle(fontSize: 32),
+                          ),
                         ),
                       )
                     : Expanded(
