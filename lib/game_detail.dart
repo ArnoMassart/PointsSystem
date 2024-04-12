@@ -73,50 +73,6 @@ class _GameDetailState extends State<GameDetail> {
     return columns;
   }
 
-  void _showAddPlayerDialog(BuildContext context, Game game) {
-    TextEditingController textFieldController = TextEditingController();
-    FocusNode focusNode = FocusNode();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Add Player"),
-          content: TextField(
-            controller: textFieldController,
-            focusNode: focusNode,
-            decoration: const InputDecoration(hintText: 'Enter player name'),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                String text = textFieldController.text;
-                RegExp pattern = RegExp(r'^[a-zA-Zéçàèù\-]+$');
-                if (pattern.hasMatch(text)) {
-                  String playerName =
-                      text.substring(0, 1).toUpperCase() + text.substring(1);
-                  setState(() {
-                    game.players
-                        .add(Player(game.players.length + 1, playerName));
-                  });
-                  GameService.saveGamesToPrefs(widget.games);
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text("Save"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   double constraintHeight = 0;
   double maxConstraintHeight = 250;
 
@@ -240,13 +196,19 @@ class _GameDetailState extends State<GameDetail> {
       List<DataCell> cells = [];
 
       cells.add(DataCell(
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              _showAddPlayerDialog(context, game);
-            },
-            child: const Icon(Icons.add),
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  game.players.add(Player(game.players.length + 1, ''));
+                });
+                GameService.saveGamesToPrefs(widget.games);
+              },
+              child: const Icon(Icons.add),
+            ),
           ),
         ),
       ));

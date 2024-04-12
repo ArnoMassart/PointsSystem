@@ -338,7 +338,7 @@ class _PlayersListState extends State<PlayersList> {
                       );
                     },
                   ),
-                )
+                ),
         ],
       ),
       bottomNavigationBar: BottomNavBar(
