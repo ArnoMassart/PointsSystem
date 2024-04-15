@@ -22,7 +22,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   TextEditingController textFieldController = TextEditingController();
 
   void _addGame(String value) {
-    _showStartWithPreviousPlayersDialog();
+    if (widget.games.isEmpty) {
+      setState(() {
+        clickedNo = true;
+      });
+    } else {
+      _showStartWithPreviousPlayersDialog();
+    }
     if (clickedNo != null) {
       if (clickedNo!) {
         setState(() {
@@ -112,6 +118,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   void _showAddGameDialog() {
     FocusNode focusNode = FocusNode(canRequestFocus: true);
+    textFieldController.text =
+        widget.games.isEmpty ? "" : widget.games[widget.games.length - 1].name;
 
     setState(() {
       focusNode.requestFocus();
