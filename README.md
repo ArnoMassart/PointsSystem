@@ -16,18 +16,18 @@ The app has a couple of different pages:
 - Has a dark mode toggle
 - Shows the last saved game
 
-## Games page:
+## Games Page:
 - Shows a list of all the games saved on the device
 - Has a filter to search for the name of the game
 - Has a filter to search for the players of the game: it will search for all the games where, this person or people if mulitple selected, are a player of
 - When clicking on the game it shows the details of the game
 - Has a function to delete a game from the device
 
-## Game detail page:
+## Game Detail Page:
 - Has the table of the game
 - Has a edit mode where the game can be changed if nescessary
 
-## Players page:
+## Players Page:
 - Shows all the players saved on the device
 - Has a function to add a new player to the list
 - Has a function to sort alfabetically
